@@ -25,7 +25,6 @@ io.on('connection', function(socket){
 	})
 	
 	socket.on('notification', function(notification){
-		console.log(notification)
 		io.emit('notification', notification)
 	})
 	
