@@ -3,6 +3,7 @@
 		<title>Chat!</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" type="text/css" href="normalize.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	</head>
 	<body>
 		<h1 id = "title">Chat!</h1>
@@ -13,9 +14,9 @@
 
 		<div id = "messageInfo">
 			<div id = "messageBox">
-				<textarea id = "message"></textarea>
+				<textarea onKeyDown = "enterMessage(this)" placeholder = "Type a message..." id = "message"></textarea>
 			</div>
-			<button id = "submit">Submit</button>
+			<button class = "btn btn-primary" id = "submit">Submit</button>
 		</div>
 		
 		<script src="/socket.io/socket.io.js"></script>
@@ -25,10 +26,13 @@
 			}
 			
 			var username = prompt("Enter a Username")
-			//var username = "User"
-			var colorList = ["red", "blue", "green"]
+			if (username == ""){
+				username = "User"
+			}
 			
-			var color = colorList[getRandomInt(0, 2)]
+			var colorList = ["red", "blue", "green", "purple"]
+			
+			var color = colorList[getRandomInt(0, colorList.length -1)]
 			
 			function updateScroll(){
 				var element = document.getElementById("messagesBox");
@@ -37,13 +41,27 @@
 			
 			var socket = io();
 			
-			document.getElementById("submit").addEventListener('click', function(){
+			function sendMessage(){
 				if (document.getElementById("message").value != ""){
 					socket.emit('chat message', {color: color, username: username, message: document.getElementById("message").value})
 					document.getElementById("message").value = ""
 				}
+			}
+			
+			//Submits the message when enter key is pressed
+			function enterMessage(key){
+				if (event.keyCode == 13){
+					event.preventDefault()
+					sendMessage()
+				}
+			}
+			
+			//Submits the message when submit button is pressed
+			document.getElementById("submit").addEventListener('click', function(){
+				sendMessage()
 			})
 			
+			//Gets the amount of users connected
 			socket.on('usersOn', function(usersOn){
 				var usersConn = document.getElementById("usersConn").innerHTML.split(": ")
 				usersConn[1] = usersOn
@@ -51,16 +69,18 @@
 				document.getElementById("usersConn").innerHTML = usersConn
 			})
 			
+			//Sends that the user has connected
 			socket.on('connect', function(){
 				socket.emit('notification', username + ' has connected')
 				socket.emit('userData', {username: username})
 			})
 			
+			//Sends a notification that a user has disconnected
 			socket.on('disconnect', function(){
-				
 				socket.emit('notification', username + ' has disconnected')
 			})
 			
+			//Creates notification in the messages box
 			socket.on('notification', function(notification){
 				var container = document.createElement("div")
 				
@@ -72,6 +92,7 @@
 				document.getElementById("messages").appendChild(container)
 			})
 			
+			//Creates message in the messages box
 			socket.on('chat message', function(msg){
 				var container = document.createElement("div")
 				var newMessage = document.createElement("div")
@@ -95,8 +116,6 @@
 				document.getElementById("messages").appendChild(container)
 				
 				updateScroll()
-				
-				//$('.message').append($('<li>').text(msg.username + ": " + msg.message))
 			})
 		</script>
 	</body>
