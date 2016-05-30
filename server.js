@@ -4,6 +4,14 @@ var path = require('path')
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
 
+/////////////////////////////////////////////////////////////////
+//This fixed the issue with long disconnecting times in browsers
+//The interval checks if player is connected every 1 seconds
+//If the player is disconnected for 5 second, they get booted
+/////////////////////////////////////////////////////////////////
+io.set('heartbeat interval', 1000);
+io.set('heartbeat timeout', 5000);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){

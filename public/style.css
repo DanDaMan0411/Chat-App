@@ -27,7 +27,7 @@
 	background-color: #D1D1D1;
 	outline: 1px solid black;
 	height: 60%;
-	width: 80%;
+	width: 95%;
 	margin: auto;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -35,7 +35,7 @@
 
 #messageInfo{
 	position: relative;
-	width: 80%;
+	width: 95%;
 	margin: auto;
 	display: block;
 }
@@ -52,14 +52,14 @@
 	margin-top: 1px;
 	position: absolute;
 	display: block;
-	width: 70%;
+	width: 80%;
 	outline: none;
 }
 
 #submit{
-	width: 30%;
+	width: 20%;
 	float: right;
-	font-size: 150%;
+	font-size: 250%;
 	height: 70px;
 	margin-top: 1px;
 }
@@ -78,15 +78,13 @@
 	background-color: white;
 	display: inline-block;
 	word-wrap: break-word;
-	width: 92%;
-	margin-left: 2%;
+	width: 100%;
 	padding: 2%;
 	overflow: hidden;
 }
 
 .username{
 	position: relative;
-	margin-left: 2%;
 	word-wrap: break-word;
 	overflow: hidden;
 	float: left;
