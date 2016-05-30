@@ -5,8 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="normalize.css">
 		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
 		
@@ -27,7 +26,6 @@
 			</div>
 		</div>
 		
-		</div>
 		<h1 id = "title">Chat!</h1>
 		<h3 id = "usersConn">Users Connected: 0</h3>
 		<div id = "messagesBox">
@@ -41,6 +39,8 @@
 			<button class = "btn btn-primary" id = "submit">Submit</button>
 		</div>
 		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 			function getRandomInt(min, max){
@@ -65,7 +65,6 @@
 					if (username == ""){
 						username = "User"
 					}
-					console.log(username)
 					
 					socket.emit('notification', username + ' has connected')
 					socket.emit('userData', {username: username})
