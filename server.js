@@ -44,14 +44,16 @@ io.on('connection', function(socket){
 })
 
 //This is for openshift
+/*
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 http.listen(port, ipaddress, function(){
 	console.log('listening on *:4000')
 })
+*/
 
 //This is for regular usage
-/*http.listen(4000, function(){
+http.listen(4000, function(){
 	console.log('listening on *:4000')
-})*/
+})
