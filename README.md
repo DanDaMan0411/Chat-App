@@ -5,7 +5,7 @@ To run the project, go to the main directory and run the command below.
 ```
 node server.js
 ```
-Then go to localhost:4000 to view the project.
+Then go to [localhost:4000](localhost:4000) to view the project.
 
 <br>
 
