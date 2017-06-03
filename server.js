@@ -42,17 +42,16 @@ io.on('connection', function(socket){
 	})
 })
 
-//This is for openshift
-/*
+//Server configuration stuff
+
+//Tries to find variable for openshift ip, if nothing then loads to localhost
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
+//Same as above, but with port
+//If you want to load on localhost onto a different port, change 4000 to whatever port you please
+var port = process.env.OPENSHIFT_NODEJS_PORT || 4000;
 
 http.listen(port, ipaddress, function(){
-	console.log('listening on *:4000')
+	console.log('Running on Openshift Server')
 })
-*/
 
-//This is for regular usage
-http.listen(4000, function(){
-	console.log('listening on *:4000')
-})
