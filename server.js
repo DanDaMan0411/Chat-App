@@ -44,9 +44,14 @@ io.on('connection', function(socket){
 
 //Server configuration stuff
 
-// Set Port
-app.set('port', (process.env.PORT || 4000));
+//Tries to find variable for openshift ip, if nothing then loads to localhost
+var ipaddress = process.env.PORT || "127.0.0.1";
 
-app.listen(app.get('port'), function(){
-	console.log('Server started on port ' + app.get('port'));
-});
+//Same as above, but with port
+//If you want to load on localhost onto a different port, change 4000 to whatever port you please
+var port = process.env.PORT || 4000;
+
+http.listen(port, ipaddress, function(){
+	console.log('Running on Openshift Server')
+})
+
